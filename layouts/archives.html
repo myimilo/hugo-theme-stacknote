@@ -1,0 +1,19 @@
+{{ define "main" }}
+<section class="section">
+  <div class="container">
+    <div class="section__head"><h1 class="section__title">{{ .Title }}</h1></div>
+    {{ $pages := where .Site.RegularPages "Section" (.Site.Params.mainSection | default "articles") }}
+    {{ range ($pages.GroupByDate "2006").Reverse }}
+      <h2 class="archives__year">{{ .Key }}</h2>
+      <ul class="archives__list">
+        {{ range .Pages }}
+          <li>
+            <span class="archives__date">{{ .Date.Format "01-02" }}</span>
+            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+          </li>
+        {{ end }}
+      </ul>
+    {{ end }}
+  </div>
+</section>
+{{ end }}

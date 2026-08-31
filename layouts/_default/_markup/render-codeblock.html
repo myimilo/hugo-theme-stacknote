@@ -1,0 +1,5 @@
+{{- $result := transform.HighlightCodeBlock . -}}
+<div class="code-block">
+  <button class="code-block__copy" type="button" data-copy-code data-copied-label="{{ i18n "copiedCode" }}">{{ i18n "copyCode" }}</button>
+  {{ $result.Wrapped }}
+</div>

@@ -1,0 +1,12 @@
+{{ define "main" }}
+<section class="section">
+  <div class="container search-page">
+    <div class="section__head"><h1 class="section__title">{{ .Title }}</h1></div>
+    <label class="search-label" for="searchInput">{{ i18n "searchLabel" }}</label>
+    <input class="search-input" id="searchInput" type="search" placeholder="{{ .Params.placeholder | default (i18n "searchPlaceholder") }}" autocomplete="off" data-index-url="{{ "index.json" | relURL }}" data-loading="{{ i18n "searchLoading" }}" data-empty="{{ i18n "searchEmpty" }}" data-no-results="{{ i18n "searchNoResults" }}" data-error="{{ i18n "searchError" }}" data-retry="{{ i18n "searchRetry" }}">
+    <div id="searchResults" class="search-results" aria-live="polite" aria-busy="true"></div>
+  </div>
+</section>
+{{- $searchScript := resources.Get "js/search.js" | minify | fingerprint -}}
+<script src="{{ $searchScript.RelPermalink }}" integrity="{{ $searchScript.Data.Integrity }}" defer></script>
+{{ end }}

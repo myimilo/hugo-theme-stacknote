@@ -1,0 +1,110 @@
+{{ define "main" }}
+  {{ $mainSection := .Site.Params.mainSection | default "articles" }}
+  {{ $articlesPage := .Site.GetPage $mainSection }}
+  {{ $articles := where .Site.RegularPages "Section" $mainSection }}
+  {{ $sorted := $articles.ByDate.Reverse }}
+  {{ $featured := first 1 $sorted }}
+  {{ $rest := after 1 $sorted }}
+  {{ $big := first 1 $rest }}
+  {{ $minis := first 3 (after 1 $rest) }}
+  {{ $minTagPosts := .Site.Params.minTagPostsToIndex | default 2 }}
+  {{ $matureTags := where .Site.Taxonomies.tags.ByCount "Count" "ge" $minTagPosts }}
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero__left">
+      <div class="hero__eyebrow">{{ .Site.Params.homeEyebrow }}</div>
+      <h1 class="hero__title">{{ .Site.Params.homeTitle }}</h1>
+      <p class="hero__sub">{{ .Site.Params.homeIntro }}</p>
+      <div class="hero__cta">
+        {{ with $articlesPage }}<a class="btn btn--primary" href="{{ .RelPermalink }}">{{ i18n "latestArticles" }}</a>{{ end }}
+        {{ if ne .Site.Params.showNewsletter false }}<a class="btn btn--ghost" href="#newsletter">{{ i18n "newsletter" }}</a>{{ end }}
+      </div>
+    </div>
+    <div class="hero__right">
+      <div class="hero__portrait" aria-hidden="true"><span>{{ .Site.Params.authorInitials | default "SN" }}</span></div>
+      <div class="hero__caption">{{ .Site.Title }} · {{ .Site.Params.role }}</div>
+    </div>
+  </section>
+
+  <!-- FEATURED -->
+  {{ if gt (len $sorted) 0 }}<section class="section">
+    <div class="container">
+      {{ range $featured }}<a class="featured__card{{ if not .Params.cover.image }} is-text-only{{ end }}" href="{{ .RelPermalink }}">
+        <div class="featured__text">
+          <div class="featured__tag">{{ i18n "featured" }}</div>
+          <h2 class="featured__title">{{ .Title }}</h2>
+          <p class="featured__excerpt">{{ .Params.description | default .Params.summary | default .Summary | plainify | truncate 150 }}</p>
+          <div class="featured__meta">{{ partial "post-meta.html" . }}</div>
+          <div class="featured__more">{{ i18n "continueReading" }} →</div>
+        </div>
+        {{ partial "post-cover.html" (dict "page" . "class" "featured__image" "eager" true) }}
+      </a>{{ else }}<div class="empty-state">{{ i18n "noArticles" }}</div>{{ end }}
+    </div>
+  </section>{{ end }}
+
+  <!-- LATEST -->
+  {{ if gt (len $rest) 0 }}<section class="section">
+    <div class="container">
+      <div class="section__head">
+        <h2 class="section__title">{{ i18n "latestArticles" }}</h2>
+        {{ with $articlesPage }}<a class="section__all" href="{{ .RelPermalink }}">{{ i18n "viewAll" }} →</a>{{ end }}
+      </div>
+      <div class="latest__grid">
+        {{ range $big }}{{ partial "post-card.html" (dict "page" . "variant" "lead") }}{{ end }}
+        <div class="mini-cards">
+          {{ range $minis }}
+          {{ partial "post-card.html" (dict "page" . "variant" "mini") }}
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </section>{{ end }}
+
+  <!-- TOPICS -->
+  {{ if and (ne .Site.Params.showTopics false) (gt (len $matureTags) 0) }}<section class="topics">
+    <div class="container">
+      <div class="topics__head">{{ i18n "browseTopics" }}</div>
+      <div class="chips">
+        {{ range first 12 $matureTags }}
+          <a class="chip" href="{{ .Page.RelPermalink }}">{{ .Page.Title }}</a>
+        {{ end }}
+      </div>
+    </div>
+  </section>{{ end }}
+
+  <!-- ABOUT -->
+  {{ if and (ne .Site.Params.showAbout false) .Site.Params.aboutIntro }}<section class="section">
+    <div class="container">
+      <div class="about__card">
+        <div class="about__avatar" aria-hidden="true">{{ .Site.Params.authorInitials | default "SN" }}</div>
+        <div class="about__body">
+          <h2 class="about__title">{{ i18n "about" }}</h2>
+          <p class="about__text">{{ .Site.Params.aboutIntro }}</p>
+          <div class="about__links">
+            {{ with .Site.Params.github }}<a class="about__link" href="{{ . }}" target="_blank" rel="noopener noreferrer">{{ i18n "github" }} →</a>{{ end }}
+            <a class="about__link" href="{{ .Site.Params.authorPage | default "/about/" | relURL }}">{{ i18n "about" }} →</a>
+            {{ with .Site.Params.email }}<a class="about__link" href="mailto:{{ . }}">{{ i18n "email" }} →</a>{{ end }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>{{ end }}
+
+  <!-- NEWSLETTER -->
+  {{ if ne .Site.Params.showNewsletter false }}<section class="newsletter" id="newsletter">
+    <div class="container">
+      <div class="newsletter__card">
+        <div class="newsletter__eyebrow">{{ i18n "newsletter" }}</div>
+        <h2 class="newsletter__title">{{ i18n "newsletterTitle" }}</h2>
+        {{ with .Site.Params.newsletterURL }}
+        <p class="newsletter__sub">{{ i18n "newsletterDescription" }}</p>
+        <a class="newsletter__btn" href="{{ . }}">{{ i18n "subscribe" }}</a>
+        {{ else }}
+        <p class="newsletter__sub">{{ i18n "rssDescription" }}</p>
+        <a class="newsletter__btn" href="{{ "/index.xml" | relURL }}">{{ i18n "followRss" }}</a>
+        {{ end }}
+      </div>
+    </div>
+  </section>{{ end }}
+{{ end }}

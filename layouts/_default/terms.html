@@ -1,0 +1,14 @@
+{{ define "main" }}
+<section class="section">
+  <div class="container">
+    <div class="section__head"><h1 class="section__title">{{ i18n "tags" }}</h1></div>
+    <div class="chips">
+      {{ $minTagPosts := .Site.Params.minTagPostsToIndex | default 2 }}
+      {{ $matureTags := where .Site.Taxonomies.tags.ByCount "Count" "ge" $minTagPosts }}
+      {{ range $matureTags }}
+        <a class="chip" href="{{ .Page.RelPermalink }}">{{ .Page.Title }} <span class="chip__count">({{ .Count }})</span></a>
+      {{ else }}<div class="empty-state">{{ i18n "noTopics" }}</div>{{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}

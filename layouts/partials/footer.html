@@ -1,0 +1,26 @@
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <span class="footer__word">{{ .Site.Title }}</span>
+        <span class="footer__tag">{{ .Site.Params.tagline }}</span>
+      </div>
+      <div class="footer__cols">
+        <div class="footer__col">
+          <span class="footer__col-head">{{ i18n "site" }}</span>
+          {{ range .Site.Menus.main }}<a class="footer__link" href="{{ .URL | relLangURL }}">{{ .Name }}</a>{{ end }}
+        </div>
+        <div class="footer__col">
+          <span class="footer__col-head">{{ i18n "follow" }}</span>
+          {{ with .Site.Params.github }}<a class="footer__link" href="{{ . }}" target="_blank" rel="noopener noreferrer">{{ i18n "github" }}</a>{{ end }}
+          <a class="footer__link" href="{{ "/index.xml" | relURL }}">{{ i18n "rss" }}</a>
+          {{ with .Site.Params.email }}<a class="footer__link" href="mailto:{{ . }}">{{ i18n "email" }}</a>{{ end }}
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span class="footer__colophon">{{ i18n "poweredBy" }}</span>
+      <span class="footer__copy">© {{ now.Year }} {{ .Site.Title }} · {{ i18n "allRightsReserved" }}</span>
+    </div>
+  </div>
+</footer>

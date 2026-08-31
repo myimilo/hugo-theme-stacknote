@@ -1,0 +1,20 @@
+{{- $page := .page -}}
+{{- $class := .class | default "card__image" -}}
+{{- $eager := .eager | default false -}}
+{{- $informative := .informative | default false -}}
+{{- with $page.Params.cover.image -}}
+  {{- $cover := partial "cover-data.html" $page -}}
+  {{- $alt := cond $informative ($page.Params.cover.alt | default $page.Title) "" -}}
+  {{- if and $informative (not $page.Params.cover.alt) -}}
+    {{- warnf "Stacknote: %q has a visible cover but no cover.alt; falling back to the page title" $page.File.Path -}}
+  {{- end -}}
+  <div class="{{ $class }} post-cover">
+    {{- if $cover.remote -}}
+    <img src="{{ $cover.src | safeURL }}" alt="{{ $alt }}" loading="{{ if $eager }}eager{{ else }}lazy{{ end }}"{{ if $eager }} fetchpriority="high"{{ end }} decoding="async">
+    {{- else if $cover.found -}}
+    <img src="{{ $cover.medium.RelPermalink }}" srcset="{{ $cover.small.RelPermalink }} 480w, {{ $cover.medium.RelPermalink }} 800w, {{ $cover.large.RelPermalink }} 1200w" sizes="(max-width: 46rem) 100vw, 50vw" width="{{ $cover.medium.Width }}" height="{{ $cover.medium.Height }}" alt="{{ $alt }}" loading="{{ if $eager }}eager{{ else }}lazy{{ end }}"{{ if $eager }} fetchpriority="high"{{ end }} decoding="async">
+    {{- else -}}
+    <img src="{{ $cover.src | relURL }}" alt="{{ $alt }}" loading="{{ if $eager }}eager{{ else }}lazy{{ end }}"{{ if $eager }} fetchpriority="high"{{ end }} decoding="async">
+    {{- end -}}
+  </div>
+{{- end -}}

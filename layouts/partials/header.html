@@ -1,0 +1,19 @@
+<header class="site-header">
+  <div class="container">
+    <a class="logo" href="{{ "/" | relURL }}">
+      <span class="logo__main">{{ .Site.Title }}</span>
+    </a>
+    <div class="nav-shell">
+      <input class="nav__check visually-hidden" type="checkbox" id="siteNavToggle" aria-controls="siteNav" aria-expanded="false">
+      <label class="nav__toggle" for="siteNavToggle">
+        <span class="visually-hidden">{{ i18n "openMenu" }}</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </label>
+      <nav class="nav" id="siteNav" aria-label="{{ i18n "primaryNavigation" }}">
+        {{ range .Site.Menus.main }}
+        <a class="nav__link" href="{{ .URL | relLangURL }}"{{ if $.IsMenuCurrent "main" . }} aria-current="page"{{ end }}>{{ .Name }}</a>
+        {{ end }}
+      </nav>
+    </div>
+  </div>
+</header>

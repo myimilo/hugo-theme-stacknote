@@ -1,0 +1,9 @@
+{{ define "main" }}
+<section class="section">
+  <div class="container error-page">
+    <h1 class="error-page__title">404</h1>
+    <p class="error-page__copy">{{ i18n "pageNotFound" }}</p>
+    <a class="btn btn--primary" href="{{ "/" | relURL }}">{{ i18n "backHome" }}</a>
+  </div>
+</section>
+{{ end }}

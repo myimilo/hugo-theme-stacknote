@@ -1,0 +1,97 @@
+- id: articles
+  translation: Articles
+- id: archive
+  translation: Archive
+- id: tags
+  translation: Tags
+- id: about
+  translation: About
+- id: search
+  translation: Search
+- id: openMenu
+  translation: Open menu
+- id: closeMenu
+  translation: Close menu
+- id: primaryNavigation
+  translation: Primary navigation
+- id: articleNavigation
+  translation: Article navigation
+- id: skipToContent
+  translation: Skip to content
+- id: latestArticles
+  translation: Latest articles
+- id: viewAll
+  translation: View all
+- id: browseTopics
+  translation: Browse by topic
+- id: featured
+  translation: Featured
+- id: continueReading
+  translation: Continue reading
+- id: minRead
+  one: "{{ .Count }} min read"
+  other: "{{ .Count }} min read"
+- id: articleFallback
+  translation: Article
+- id: site
+  translation: Site
+- id: follow
+  translation: Follow
+- id: github
+  translation: GitHub
+- id: rss
+  translation: RSS
+- id: email
+  translation: Email
+- id: poweredBy
+  translation: Powered by Hugo and the Stacknote theme
+- id: allRightsReserved
+  translation: All rights reserved
+- id: pageNotFound
+  translation: This page wandered off, but the articles are still here.
+- id: backHome
+  translation: Back to home
+- id: searchLabel
+  translation: Search articles
+- id: searchPlaceholder
+  translation: Search by title, topic, or article text…
+- id: searchLoading
+  translation: Loading the search index…
+- id: searchEmpty
+  translation: Start typing to search the archive.
+- id: searchNoResults
+  translation: No articles matched your search.
+- id: searchError
+  translation: The search index could not be loaded.
+- id: searchRetry
+  translation: Try again
+- id: noArticles
+  translation: No articles have been published yet.
+- id: noTopics
+  translation: No topics have enough articles yet.
+- id: newsletter
+  translation: Newsletter
+- id: newsletterTitle
+  translation: New articles, delivered occasionally
+- id: newsletterDescription
+  translation: Practical notes on AI engineering, tools, and systems—one or two emails a month.
+- id: subscribe
+  translation: Subscribe
+- id: rssDescription
+  translation: Prefer feeds? Follow every new article via RSS.
+- id: followRss
+  translation: Follow via RSS
+- id: tableOfContents
+  translation: On this page
+- id: updated
+  translation: Updated
+- id: copyCode
+  translation: Copy
+- id: copiedCode
+  translation: Copied
+- id: previousArticle
+  translation: Previous
+- id: nextArticle
+  translation: Next
+- id: relatedArticles
+  translation: Related articles

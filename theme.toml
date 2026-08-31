@@ -1,0 +1,13 @@
+name = "Stacknote"
+license = "MIT"
+licenselink = "https://github.com/myimilo/hugo-theme-stacknote/blob/main/LICENSE"
+description = "A warm editorial Hugo theme for field-tested technical notes — clay accents, serif display, and hard-shadow cards."
+homepage = "https://github.com/myimilo/hugo-theme-stacknote"
+demosite = "https://wanglong.cv/"
+tags = ["blog", "technical", "editorial", "responsive", "minimal", "personal", "search"]
+features = ["responsive", "full-text-search", "image-processing", "syntax-highlighting", "table-of-contents", "related-content", "social-metadata", "structured-data", "i18n-ready"]
+min_version = "0.160.0"
+
+[author]
+  name = "Long Wang"
+  homepage = "https://wanglong.cv/"

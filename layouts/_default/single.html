@@ -1,0 +1,45 @@
+{{ define "main" }}
+{{- $showToc := ne .Site.Params.showToc false -}}
+{{- $isArticle := eq .Section (.Site.Params.mainSection | default "articles") -}}
+{{- $related := slice -}}
+{{- if $isArticle }}{{ $related = first 3 (.Site.RegularPages.Related .) }}{{ end -}}
+<div class="post-layout{{ if and $showToc (in .TableOfContents "<li>") }} has-toc{{ end }}">
+  <article class="post">
+    <header class="post__header">
+      {{ if $isArticle }}<div class="post__tag">{{ with .Params.tags }}{{ index . 0 }}{{ else }}{{ i18n "articleFallback" }}{{ end }}</div>{{ end }}
+      <h1 class="post__title">{{ .Title }}</h1>
+      {{ if $isArticle }}<div class="post__meta">
+        {{ partial "post-meta.html" . }}
+        {{ if ne (.Lastmod.Format "2006-01-02") (.PublishDate.Format "2006-01-02") }}
+        <span aria-hidden="true">·</span>
+        <span>{{ i18n "updated" }} <time datetime="{{ .Lastmod.Format "2006-01-02" }}">{{ time.Format ":date_medium" .Lastmod }}</time></span>
+        {{ end }}
+      </div>{{ end }}
+    </header>
+    {{ if not .Params.cover.hiddenInSingle }}{{ partial "post-cover.html" (dict "page" . "class" "post__cover" "eager" true "informative" true) }}{{ end }}
+    <div class="post__body">
+      {{ .Content }}
+    </div>
+    {{ if and $isArticle (or .PrevInSection .NextInSection) }}
+    <nav class="post-nav" aria-label="{{ i18n "articleNavigation" }}">
+      {{ with .PrevInSection }}<a class="post-nav__link" href="{{ .RelPermalink }}"><span>{{ i18n "previousArticle" }}</span><strong>{{ .Title }}</strong></a>{{ end }}
+      {{ with .NextInSection }}<a class="post-nav__link post-nav__link--next" href="{{ .RelPermalink }}"><span>{{ i18n "nextArticle" }}</span><strong>{{ .Title }}</strong></a>{{ end }}
+    </nav>
+    {{ end }}
+    {{ with $related }}
+    <section class="related" aria-labelledby="related-title">
+      <h2 id="related-title" class="related__title">{{ i18n "relatedArticles" }}</h2>
+      <div class="related__grid">{{ range . }}{{ partial "post-card.html" (dict "page" . "variant" "related") }}{{ end }}</div>
+    </section>
+    {{ end }}
+  </article>
+  {{ if and $showToc (in .TableOfContents "<li>") }}
+  <aside class="post-toc">
+    <details open>
+      <summary>{{ i18n "tableOfContents" }}</summary>
+      {{ .TableOfContents }}
+    </details>
+  </aside>
+  {{ end }}
+</div>
+{{ end }}

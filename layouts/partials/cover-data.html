@@ -1,0 +1,19 @@
+{{- $src := .Params.cover.image | default "" -}}
+{{- $data := dict "src" $src "remote" false "found" false "socialURL" ($src | absURL) -}}
+{{- if or (hasPrefix $src "http://") (hasPrefix $src "https://") -}}
+  {{- $data = merge $data (dict "remote" true "found" true "socialURL" $src) -}}
+{{- else -}}
+  {{- with resources.Get $src -}}
+    {{- $small := .Resize "480x webp q82" -}}
+    {{- $medium := .Resize "800x webp q82" -}}
+    {{- $large := .Resize "1200x webp q82" -}}
+    {{- $data = merge $data (dict
+      "found" true
+      "small" $small
+      "medium" $medium
+      "large" $large
+      "socialURL" $large.Permalink
+    ) -}}
+  {{- end -}}
+{{- end -}}
+{{- return $data -}}

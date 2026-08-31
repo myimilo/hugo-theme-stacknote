@@ -1,0 +1,12 @@
+{{- $page := .page -}}
+{{- $variant := .variant | default "list" -}}
+{{- $hasCover := isset $page.Params "cover" | and (ne $page.Params.cover.image nil) -}}
+<a class="post-card post-card--{{ $variant }}{{ if not $hasCover }} is-text-only{{ end }}" href="{{ $page.RelPermalink }}">
+  {{ if $hasCover }}{{ partial "post-cover.html" (dict "page" $page "class" "post-card__media") }}{{ end }}
+  <div class="post-card__body">
+    {{ with $page.Params.tags }}<div class="post-card__tag">{{ index . 0 }}</div>{{ end }}
+    <h{{ if eq $variant "mini" }}3{{ else }}2{{ end }} class="post-card__title">{{ $page.Title }}</h{{ if eq $variant "mini" }}3{{ else }}2{{ end }}>
+    {{ if ne $variant "mini" }}<p class="post-card__excerpt">{{ $page.Params.description | default $page.Params.summary | default $page.Summary | plainify | truncate 120 }}</p>{{ end }}
+    <div class="post-card__meta">{{ partial "post-meta.html" $page }}</div>
+  </div>
+</a>

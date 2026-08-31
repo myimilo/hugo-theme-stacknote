@@ -6,9 +6,9 @@ The live design can be seen at [wanglong.cv](https://wanglong.cv/). A self-conta
 
 ## Preview
 
-[![Stacknote desktop preview](images/tn.png)](images/screenshot-full.png)
+[![Stacknote desktop preview](https://raw.githubusercontent.com/myimilo/hugo-theme-stacknote/main/images/tn.png)](https://raw.githubusercontent.com/myimilo/hugo-theme-stacknote/main/images/screenshot-full.png)
 
-[Desktop screenshot](images/screenshot.png) · [Full desktop page](images/screenshot-full.png) · [Mobile screenshot](images/mobile.png) · [Full mobile page](images/mobile-full.png)
+[Desktop screenshot](https://raw.githubusercontent.com/myimilo/hugo-theme-stacknote/main/images/screenshot.png) · [Full desktop page](https://raw.githubusercontent.com/myimilo/hugo-theme-stacknote/main/images/screenshot-full.png) · [Mobile screenshot](https://raw.githubusercontent.com/myimilo/hugo-theme-stacknote/main/images/mobile.png) · [Full mobile page](https://raw.githubusercontent.com/myimilo/hugo-theme-stacknote/main/images/mobile-full.png)
 
 ## Features
 

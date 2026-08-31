@@ -1,0 +1,63 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Hugo ${{ matrix.hugo-version }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        hugo-version:
+          - "0.160.0"
+          - latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Set up Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: ${{ matrix.hugo-version }}
+          extended: true
+
+      - name: Show Hugo version
+        run: hugo version
+
+      - name: Build example site
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          themes_root="${RUNNER_TEMP}/stacknote-themes"
+          mkdir -p "${themes_root}"
+          ln -s "${GITHUB_WORKSPACE}" "${themes_root}/stacknote"
+          export HUGO_RESOURCEDIR="${RUNNER_TEMP}/hugo-resources-${{ matrix.hugo-version }}"
+
+          hugo \
+            --source "${GITHUB_WORKSPACE}/exampleSite" \
+            --themesDir "${themes_root}" \
+            --noBuildLock \
+            --cacheDir "${RUNNER_TEMP}/hugo-cache-${{ matrix.hugo-version }}" \
+            --destination "${RUNNER_TEMP}/stacknote-build-${{ matrix.hugo-version }}" \
+            --cleanDestinationDir \
+            --panicOnWarning \
+            --minify
+
+      - name: Check whitespace errors
+        run: git diff --check

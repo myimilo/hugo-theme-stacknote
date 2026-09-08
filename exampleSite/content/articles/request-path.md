@@ -3,9 +3,10 @@ title: "Trace the Request Before You Tune the Service"
 date: 2026-08-17
 description: "A small observability habit that prevents teams from optimizing the wrong stage of a production request."
 tags: [Systems, Observability]
-cover:
-  image: images/request-path-cover.png
-  alt: "A request flowing through four measured stages of a production system"
+params:
+  cover:
+    image: images/request-path-cover.png
+    alt: "A request flowing through four measured stages of a production system"
 ---
 
 A slow endpoint is rarely one indivisible wait. It is a chain: connection setup, queueing, application work, storage, and the trip back to the caller. The useful question is not simply “why is this request slow?” but “where did this request spend its time?”

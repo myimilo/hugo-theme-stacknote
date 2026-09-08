@@ -3,9 +3,10 @@ title: "Welcome to Stacknote"
 date: 2026-08-24
 description: "A demonstration of Stacknote's article typography, navigation, search, and editorial layout."
 tags: [Hugo, Writing]
-cover:
-  image: images/stacknote-cover.png
-  alt: "Layered editorial cards arranged on a warm paper background"
+params:
+  cover:
+    image: images/stacknote-cover.png
+    alt: "Layered editorial cards arranged on a warm paper background"
 ---
 
 Stacknote is designed for technical writing that values clarity and character. It gives a personal engineering blog a recognizable visual voice without turning every page into a product landing page.

@@ -36,16 +36,16 @@ params:
 menu:
   main:
     - name: Archive
-      url: /archives/
+      pageRef: /archives
       weight: 10
     - name: Search
-      url: /search/
+      pageRef: /search
       weight: 20
     - name: Tags
-      url: /tags/
+      pageRef: /tags
       weight: 30
     - name: About
-      url: /about/
+      pageRef: /about
       weight: 40
 
 related:

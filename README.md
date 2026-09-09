@@ -2,7 +2,7 @@
 
 Stacknote is a warm editorial Hugo theme for technical notes and personal engineering blogs. It combines serif display typography, clay accents, hard-shadow cards, responsive image processing, accessible navigation, full-text fuzzy search, and article-focused SEO.
 
-The live design can be seen at [wanglong.cv](https://wanglong.cv/). A self-contained reference site is included in [`exampleSite/`](exampleSite/).
+The live design can be seen at [wanglong.cv](https://wanglong.cv/). A self-contained reference site is included in [`exampleSite/`](exampleSite/), and a hosted build of it runs at [stacknote.wanglong.cv](https://stacknote.wanglong.cv/) if you want to see the theme with placeholder content only.
 
 ## Preview
 
@@ -103,6 +103,13 @@ params:
   aboutIntro: I write about systems that have survived contact with production.
   github: https://github.com/example
   email: hello@example.com
+  socialLinks:
+    - name: github
+      url: https://github.com/example
+    - name: email
+      url: mailto:hello@example.com
+    - name: rss
+      url: /index.xml
   mainSection: articles
   authorPage: /about/
   showToc: true
@@ -213,6 +220,7 @@ All theme-specific options live under `params`.
 | `aboutIntro` | empty | Text shown in the homepage About section |
 | `github` | empty | GitHub URL shown in the About section and footer |
 | `email` | empty | Email address shown in the About section and footer |
+| `socialLinks` | empty | Ordered list of icon links beneath the footer's site name; see below |
 | `mainSection` | `articles` | Content section used by the homepage, archives, search, and article metadata |
 | `authorPage` | `/about/` | Author page used by links and structured data |
 | `showToc` | `true` | Show the article table of contents when headings are present |
@@ -226,6 +234,32 @@ All theme-specific options live under `params`.
 | `favicon` | built-in favicon | Optional favicon URL replacing Stacknote's default SVG |
 
 Homepage sections can be disabled independently by setting their `show*` parameter to `false`.
+
+### Footer social icons
+
+Add `socialLinks` under `params` to display an icon row beneath the site name and tagline on the left side of the footer:
+
+```yaml
+params:
+  socialLinks:
+    - name: github
+      url: https://github.com/example
+    - name: linkedin
+      url: https://www.linkedin.com/in/example/
+    - name: x
+      url: https://x.com/example
+    - name: email
+      url: mailto:hello@example.com
+    - name: rss
+      url: /index.xml
+    - name: mastodon
+      label: Follow me on Mastodon
+      url: https://mastodon.social/@example
+```
+
+Built-in icons: `github`, `linkedin`, `x`, `twitter`, `instagram`, `youtube`, `email`, and `rss`. Other names use a generic link icon. The optional `label` supplies the accessible name and hover tooltip; otherwise the platform name is used. Links open in the current tab.
+
+Links appear in configuration order. Entries with empty URLs are skipped; omitting the list or setting `socialLinks: []` hides the row entirely. These links are independent of the existing `github` and `email` parameters used by the About section and Follow column. Use a full URL, a `mailto:` URL for email, or a site-relative path for local destinations.
 
 Google Analytics uses Hugo's standard top-level configuration rather than a theme parameter:
 

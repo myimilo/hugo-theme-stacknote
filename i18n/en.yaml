@@ -37,6 +37,8 @@
   translation: Site
 - id: follow
   translation: Follow
+- id: socialLinks
+  translation: Social links
 - id: github
   translation: GitHub
 - id: rss
@@ -44,7 +46,7 @@
 - id: email
   translation: Email
 - id: poweredBy
-  translation: Powered by Hugo and the Stacknote theme
+  translation: "Powered by [Hugo](https://gohugo.io/) and the [Stacknote](https://github.com/myimilo/hugo-theme-stacknote) theme"
 - id: allRightsReserved
   translation: All rights reserved
 - id: pageNotFound

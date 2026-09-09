@@ -153,9 +153,17 @@ button, input { font: inherit; }
 .footer__brand, .footer__col { display: flex; flex-direction: column; gap: .75rem; }
 .footer__word { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; }
 .footer__tag, .footer__col-head, .footer__bottom { color: var(--on-dark-3); }
+.footer__brand { min-width: 0; }
+.footer__social { display: flex; flex-wrap: wrap; gap: .375rem; padding: 0; margin: .25rem 0 0; list-style: none; }
+.footer__social-link { display: inline-flex; align-items: center; justify-content: center; width: 2.75rem; height: 2.75rem; border: 1px solid var(--on-dark-3); border-radius: var(--radius); color: var(--on-dark-2); }
+.footer__social-link:hover { background: var(--on-dark); color: var(--ink); border-color: var(--on-dark); }
+.footer__social-link:focus-visible { outline-color: var(--on-dark); }
 .footer__cols { display: flex; gap: 4rem; flex-wrap: wrap; }
 .footer__link { min-height: 2.75rem; display: inline-flex; align-items: center; color: var(--on-dark-2); }
 .footer__link:hover { color: var(--on-dark); }
+.footer__colophon a { text-decoration: underline; text-underline-offset: .2em; }
+.footer__colophon a:hover { color: var(--on-dark); }
+.footer__colophon a:focus-visible { outline-color: var(--on-dark); }
 .footer__bottom { margin-block-start: 2rem; padding-block-start: 1.5rem; display: flex; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; border-block-start: .0625rem solid rgba(255,255,255,.16); font-family: var(--font-mono); font-size: .7rem; letter-spacing: .05em; }
 
 .post-layout { max-width: 78rem; margin-inline: auto; padding-inline: var(--pad); }

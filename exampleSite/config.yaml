@@ -32,6 +32,13 @@ params:
   minTagPostsToIndex: 2
   themeColor: "#FAFAF7"
   defaultSocialImage: images/social-card.png
+  socialLinks:
+    - name: github
+      url: https://github.com/myimilo/hugo-theme-stacknote
+    - name: email
+      url: mailto:hello@example.com
+    - name: rss
+      url: /index.xml
 
 menu:
   main:

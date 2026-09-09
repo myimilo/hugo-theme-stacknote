@@ -4,6 +4,7 @@
       <div class="footer__brand">
         <span class="footer__word">{{ .Site.Title }}</span>
         <span class="footer__tag">{{ .Site.Params.tagline }}</span>
+        {{ partial "social-links.html" . }}
       </div>
       <div class="footer__cols">
         <div class="footer__col">
@@ -19,7 +20,7 @@
       </div>
     </div>
     <div class="footer__bottom">
-      <span class="footer__colophon">{{ i18n "poweredBy" }}</span>
+      <span class="footer__colophon">{{ i18n "poweredBy" | markdownify }}</span>
       <span class="footer__copy">© {{ now.Year }} {{ .Site.Title }} · {{ i18n "allRightsReserved" }}</span>
     </div>
   </div>

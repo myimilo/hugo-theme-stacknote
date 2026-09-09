@@ -1,0 +1,24 @@
+{{- $links := slice -}}
+{{- range .Site.Params.socialLinks -}}
+  {{- $url := strings.TrimSpace (.url | default "") -}}
+  {{- if $url -}}
+    {{- if and (hasPrefix $url "/") (not (hasPrefix $url "//")) -}}
+      {{- $url = strings.TrimPrefix "/" $url | relURL -}}
+    {{- end -}}
+    {{- $name := lower (strings.TrimSpace (.name | default "link")) -}}
+    {{- $labels := dict "github" "GitHub" "linkedin" "LinkedIn" "x" "X" "twitter" "Twitter" "instagram" "Instagram" "youtube" "YouTube" "email" (i18n "email") "rss" (i18n "rss") -}}
+    {{- $label := .label | default (index $labels $name) | default (humanize $name) -}}
+    {{- $links = $links | append (dict "name" $name "url" $url "label" $label) -}}
+  {{- end -}}
+{{- end -}}
+{{- with $links }}
+<ul class="footer__social" aria-label="{{ i18n "socialLinks" }}">
+  {{- range . }}
+  <li>
+    <a class="footer__social-link" href="{{ .url }}" aria-label="{{ .label }}" title="{{ .label }}">
+      {{ partial "social-icon.html" .name }}
+    </a>
+  </li>
+  {{- end }}
+</ul>
+{{- end -}}
